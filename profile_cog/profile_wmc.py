@@ -31,7 +31,7 @@ class ProfileCogWmc(commands.Cog):
         embed = discord.Embed(
             title=f"{member.name}'s profile", color=discord.Color(0).from_rgb(47, 48, 55)
         )
-        data = await self.config.user(member.id).profile()
+        data = await self.config.user(member).profile()
         for k, v in data.items():
             if not v:
                 continue
