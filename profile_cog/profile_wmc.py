@@ -70,13 +70,13 @@ class ProfileCogWmc(commands.Cog):
                 f"Bruh, you cannot set that ://\n Choose one from: `shell`, `distro`, `bar`, `system_specs`, `wm_de`, `dotfiles`, `terminal`, `screenshot_link`, `editor`, `theme`"
             )
 
-        field = "system_specs" if field in ["system_specs", "systemspecs"] else None
+        field = "system_specs" if field in ["system_specs", "systemspecs"] else field
         field = (
             "wm_de"
             if field in ["wm_de", "wm", "de", "desktopenvironment", "windowmanager"]
-            else None
+            else field
         )
-        field = "screenshot_link" if field in ["screenshot_link", "screenshot", "image"] else None
+        field = "screenshot_link" if field in ["screenshot_link", "screenshot", "image"] else field
         old = await self.config.user(ctx.author).profile()
         old[field] = value
         await self.config.user(ctx.author).profile.set(old)
