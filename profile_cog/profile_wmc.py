@@ -40,7 +40,7 @@ class ProfileCogWmc(commands.Cog):
                 continue
             embed.add_field(name=f"**{k}**", value=v, inline=True)
         embed.set_author(name=member.name, icon_url=member.avatar_url_as())
-        ctx.reply(embed=embed)
+        await ctx.reply(embed=embed)
 
     @profile.command(name="set")
     async def set(self, ctx, field, *, value):
