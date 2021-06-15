@@ -23,7 +23,7 @@ class ProfileCogWmc(commands.Cog):
         }
         self.config.register_user(**default_user)
 
-    @commands.group(name="profile", invoke_without_commands=True)
+    @commands.group(name="profile", invoke_without_command=True)
     async def profile(self, ctx, member: Optional[discord.User]):
         if not member:
             member = ctx.author
