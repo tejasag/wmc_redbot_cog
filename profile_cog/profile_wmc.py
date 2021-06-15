@@ -7,7 +7,7 @@ class ProfileCogWmc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.config = Config.get_conf(self, identifier=838844992296969)
-        default_member = {
+        default_user = {
             "profile": {
                 "shell": None,
                 "distro": None,
@@ -21,17 +21,17 @@ class ProfileCogWmc(commands.Cog):
                 "theme": None,
             }
         }
-        self.config.register_member(**default_member)
+        self.config.register_user(**default_user)
 
     @commands.group(name="profile", invoke_without_commands=True)
-    async def profile(self, ctx, member: Optional[discord.Member]):
+    async def profile(self, ctx, member: Optional[discord.User]):
         if not member:
             member = ctx.author
 
         embed = discord.Embed(
             title=f"{member.name}'s profile", color=discord.Color(0).from_rgb(47, 48, 55)
         )
-        data = await self.config.member(member.id).profile()
+        data = await self.config.user(member.id).profile()
         for k, v in data.items():
             if not v:
                 continue
@@ -77,9 +77,9 @@ class ProfileCogWmc(commands.Cog):
             else None
         )
         field = "screenshot_link" if field in ["screenshot_link", "screenshot", "image"] else None
-        old = await self.config.member(ctx.author).profile()
+        old = await self.config.user(ctx.author).profile()
         old[field] = value
-        await self.config.member(ctx.author).profile.set(old)
+        await self.config.user(ctx.author).profile.set(old)
         embed = discord.Embed(
             title=f"Done!",
             description=f"The value of `{field}` is now `{value}`",
