@@ -1,6 +1,6 @@
 import discord
 from redbot.core import commands, Config
-from typing import Optionalw
+from typing import Optional
 
 
 class ProfileCogWmc(commands.Cog):
