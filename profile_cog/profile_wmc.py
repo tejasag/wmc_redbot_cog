@@ -80,15 +80,17 @@ class ProfileCogWmc(commands.Cog):
             else field
         )
         field = "screenshot_link" if field in ["screenshot_link", "screenshot", "image"] else field
+
+        if not value:
+            old[field] = None
+            await self.config.user(ctx.author).profile.set(old)
+            return await ctx.reply(f"Done! I have reset the `{field} field!`")
+
         if field == "screenshot_link":
             if not (value.startswith("https://") and  (value.endswith("png") or value.endswith("jpg") or value.endswith("jpeg") or value.endswith("gif") or value.endswith("webp"))):
                return await ctx.send("Please enter a valid image/gif url for profile screenshot!")
         old = await self.config.user(ctx.author).profile()
 
-        if not value:
-            old[field] = None
-            await self.config.user(ctx.author).profile.set(old)
-            return ctx.reply(f"Done! I have reset the `{field} field!`")
 
         old[field] = value
         await self.config.user(ctx.author).profile.set(old)
