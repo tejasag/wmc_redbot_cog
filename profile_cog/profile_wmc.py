@@ -35,11 +35,8 @@ class ProfileCogWmc(commands.Cog):
         for k, v in data.items():
             if not v:
                 continue
-            if k == "screenshot_link" and v is not None:
-                
-                    embed.set_image(url=v)
-                else:
-                    
+            if k == "screenshot_link" and v is not None:    
+                embed.set_image(url=v)
                 continue
             embed.add_field(name=f"**{k}**", value=v, inline=True)
         embed.set_author(name=member.name, icon_url=member.avatar_url_as())
